@@ -15,7 +15,7 @@
 
 # Для каждой конечной точки необходимо проводить валидацию данных запроса и ответа. Для этого использовать библиотеку Рудапёс.
 
-import logging
+import logging, collections
 from fastapi import FastAPI
 # from pydantic import BaseModel
 from dzms import *
@@ -26,18 +26,29 @@ logger = logging.getLogger(__name__)
 
 
 @app.get('/tasks')
-def tasklist():
+async def tasklist():
     logger.info('Список задач загружен.')
     return (taskslist)
 
 @app.get('/tasks/{id}')
-def tasklist(id: int):
+async def tasklist(id: int):
     if id in taskslist:
         logger.info('Данная задача загружена.')
         return (taskslist[id])
     else:
         logger.info('Данной задачи не существует.')
         return (taskslist)
+    
+@app.post('/tasks')
+async def tasklist(name: Task):
+    # if id in taskslist:
+        # lastid=taskslist[-1]
+        taskslist[max(taskslist)+1] = name
+        logger.info('Данная задача успешно добавлена.')
+        return (taskslist)
+    # else:
+    #     logger.info('Данной задачи не существует.')
+    #     return (taskslist)
 
 
 

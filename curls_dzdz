@@ -1,0 +1,7 @@
+POST запрос:
+curl -X 'POST' 'http://127.0.0.1:8000/tasks'
+-H 'accept: application/json'
+-H 'Content-Type: application/json'
+-d '{"name": "BestSale", "id": 5}'
+
+curl -X 'POST' 'http://127.0.0.1:8000/tasks' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"name": "BestSale", "id": 5}'
