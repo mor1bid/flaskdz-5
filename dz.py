@@ -41,15 +41,22 @@ async def tasklist(id: int):
     
 @app.post('/tasks')
 async def tasklist(name: Task):
-    # if id in taskslist:
-        # lastid=taskslist[-1]
+    if id not in taskslist:
         taskslist[max(taskslist)+1] = name
         logger.info('Данная задача успешно добавлена.')
         return (taskslist)
-    # else:
-    #     logger.info('Данной задачи не существует.')
-    #     return (taskslist)
+    else:
+        logger.info('Данная задача уже существует.')
+        return (taskslist)
 
-
+@app.put('/tasks/{id}')
+async def tasklist(id: int, name: Task):
+    if id in taskslist:
+        taskslist[id] = name
+        logger.info('Данная задача успешно изменена.')
+        return (taskslist)
+    else:
+        logger.info('Данной задачи не существует.')
+        return (taskslist)
 
 # logger.info('Произошла ошибка. Повторите попытку.')
