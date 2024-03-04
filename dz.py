@@ -58,5 +58,14 @@ async def tasklist(id: int, name: Task):
     else:
         logger.info('Данной задачи не существует.')
         return (taskslist)
+@app.delete('/tasks/{id}')
+async def tasklist(id: int, name: Task):
+    if id in taskslist:
+        taskslist[id] = name
+        logger.info('Данная задача успешно удалена.')
+        return (taskslist)
+    else:
+        logger.info('Данной задачи не существует.')
+        return (taskslist)
 
 # logger.info('Произошла ошибка. Повторите попытку.')
