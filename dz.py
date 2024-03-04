@@ -24,6 +24,10 @@ app = FastAPI()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+@app.get('/')
+def base():
+    logger.info('API успешно загружено.')
+    return ('Привет! Здесь ничего не происходит!')
 
 @app.get('/tasks')
 async def tasklist():
@@ -58,10 +62,11 @@ async def tasklist(id: int, name: Task):
     else:
         logger.info('Данной задачи не существует.')
         return (taskslist)
+
 @app.delete('/tasks/{id}')
-async def tasklist(id: int, name: Task):
+async def tasklist(id: int):
     if id in taskslist:
-        taskslist[id] = name
+        taskslist.pop(id)
         logger.info('Данная задача успешно удалена.')
         return (taskslist)
     else:
